@@ -7,7 +7,7 @@ import * as AuthActions from '../../store/actions/authActions';
 
 const fields =[
     {name: 'email', elementName: 'input', type: 'email', placeholder: 'Your Email'},
-    {name: 'passord', elementName: 'input', type: 'password', placeholder: 'Your Password'}
+    {name: 'password', elementName: 'input', type: 'password', placeholder: 'Your Password'}
 ]
 
 class Login extends Component{
@@ -20,7 +20,10 @@ class Login extends Component{
                             <h1>Login</h1>
                         </div>
                         <div className="row">
-                            <form onSubmit={this.props.handleSubmit}>
+                            <form onSubmit={e=>{
+                                e.preventDefault();
+                                this.props.login(this.props.values.email, this.props.values.password);
+                            }}>
                                 {fields.map((f,i)=>{
                                     return (
                                         <div className="col-md-12">
@@ -51,7 +54,7 @@ class Login extends Component{
 
 const mapStateToProps = state=>{
     return{
-        auth:state.auth
+        auth: state.auth
     }
 };
 
@@ -63,7 +66,10 @@ const mapDispatchToProps = dispatch =>{
     }
 };
 
-export default connect(withFormik({
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withFormik({
     mapPropsToValues: ()=>({
         email:'',
         password:''
@@ -76,7 +82,9 @@ export default connect(withFormik({
         password: Yup.string().required("Ypu must enter password")
         
     }),
-    handleSubmit: (values, {setSubmitting})=>{
+    handleSubmit: (values, {setSubmitting}, login)=>{
         console.log("Login attempt", values);
+        //login(values.email, values.pass);
     }
-}))(Login);
+})
+(Login));
