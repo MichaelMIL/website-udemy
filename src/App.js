@@ -5,30 +5,55 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 //Pages
 import  Home from './components/Pages/Home';
 import About from './components/Pages/About';
-import Contact from './components/Pages/Contact'
+import Contact from './components/Pages/Contact';
+import Login from './components/Pages/Login';
+
+import AdminWrapper from './components/AdminWrapper';
 
 class App extends Component{
   render(){
     return (
       <Router>
-        <PageWrapper>
+
+        <Route 
+          path= "/admin"
+          render= {props=>(
+            <AdminWrapper>
+              <Login/>
+            </AdminWrapper>
+
+          )}
+        
+        />
+
             <Route
               exact = {true}
               path="/"
-              component={Home}
+              render= {props=>(
+                <PageWrapper>
+                  <Home {...props} />
+                </PageWrapper>
+              )}
             />
 
             <Route
               path="/about"
-              component = {About}
+              render= {props=>(
+                <PageWrapper>
+                  <About {...props} />
+                </PageWrapper>
+              )}
             />
 
             <Route 
               path="/contact"
-              component = {Contact}
+              render= {props=>(
+                <PageWrapper>
+                  <Contact {...props} />
+                </PageWrapper>
+              )}
             />
 
-        </PageWrapper>
       </Router>
     );
   }
