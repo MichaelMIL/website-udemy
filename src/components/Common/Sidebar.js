@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import {Link} from 'react-router-dom';
+//import ListSubheader from '@material-ui/core/ListSubheader';
 import SidebarItem from './SidebarItem';
 
 //icons

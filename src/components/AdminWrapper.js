@@ -14,8 +14,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 //Drawer imports
 import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+//import List from '@material-ui/core/List';
+//import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -25,6 +25,10 @@ import Divider from '@material-ui/core/Divider';
 
 const drawerWidth = 240;
 const styles = theme =>({
+    root:{
+        display: 'flex'
+    },
+    appBarSpace: theme.mixins.toolbar,
     toolbar:{
         paddindRight: 24
     },
@@ -66,6 +70,12 @@ const styles = theme =>({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
         })
+    },
+    content:{
+        flexGrow: 1,
+        padding: theme.spacing.units *3,
+        hight: '100vh',
+        overflow: 'auto'
     }
 });
 
@@ -90,13 +100,19 @@ class AdminWrapper extends Component{
     render(){
         const {classes}= this.props;
         return(
-            <div id="admin-page">
+            <div id="admin-page" className={classes.root}>
 
                 <AppBar className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
-                        <IconButton>
+                        {this.state.open ?
+                       null 
+                    :
+                    <IconButton>
                             <MenuIcon onClick = {this.handleDrawerOpen}/>
                         </IconButton>
+                    
+                    }
+                        
                         <Typography 
                             component='h1'
                             variant="h6"
@@ -120,8 +136,12 @@ class AdminWrapper extends Component{
                         <Divider/>
                         <Sidebar />
                     </Drawer>
+                    <main className={classes.content}>
+                        <div className={classes.appBarSpace} />
+                       {this.props.children} 
+                    </main>
 
-                {this.props.children}
+                
             </div>
         )
     }
