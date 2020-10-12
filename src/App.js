@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PageWrapper from './components/PageWrapper';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {connect} from 'react-redux';
 
 //Pages
-import  Home from './components/Pages/Home';
+import Home from './components/Pages/Home';
 import About from './components/Pages/About';
 import Contact from './components/Pages/Contact';
 import Login from './components/Pages/Login';
+import Dashboard from './components/Pages/Dashboard';
 
 import AdminWrapper from './components/AdminWrapper';
 
@@ -17,13 +19,21 @@ class App extends Component{
 
         <Route 
           path= "/admin"
-          render= {props=>(
-            <AdminWrapper>
-              <Login/>
-            </AdminWrapper>
+          render= {props=>{
+            console.log("props: ", props);
+            return(
+              <AdminWrapper>
+              {this.props.auth.token ?
 
-          )}
-        
+                <Dashboard/>
+                : 
+                <Login/>
+                }
+            </AdminWrapper>
+            )
+          }
+        }
+            
         />
 
             <Route
@@ -59,4 +69,19 @@ class App extends Component{
   }
 }
 
-export default App;
+const mapStateToProps= state => {
+  return{
+   auth: state.auth
+  }
+}
+
+const mapDispatchToProps= dispatch=>{
+  return{
+
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

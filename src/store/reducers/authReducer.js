@@ -9,7 +9,7 @@ const auth = (state = defualtState , action)=>{
             return{
                 ...state,
                 user: action.payload,
-                token: 1
+                token: action.payload.token
             }
         default:
             return state;
