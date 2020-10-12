@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './assets/css/admin.css';
 
+import Sidebar from './Common/Sidebar';
 
 //material-ui
 import classNames from 'classnames';
@@ -117,12 +118,8 @@ class AdminWrapper extends Component{
                             </IconButton>
                         </div>
                         <Divider/>
-                        <List>
-                            <ListItem>
-                                Dashboard
-                            </ListItem>
-                        </List>
-                </Drawer>
+                        <Sidebar />
+                    </Drawer>
 
                 {this.props.children}
             </div>
