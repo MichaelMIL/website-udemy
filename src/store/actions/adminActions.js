@@ -33,3 +33,14 @@ export const addPost = (post,token)=>{
         })
     }
 }
+
+export const getSinglePost = (id, token)=>{
+    return dispatch=>{
+        API.getSinglePost(id,token,res=>{
+            dispatch({
+                type: 'GOT_SINGLE_POST',
+                payload : res.data
+            })
+        })
+    }
+}

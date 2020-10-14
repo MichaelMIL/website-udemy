@@ -1,6 +1,7 @@
 const defualtState = {
     users: [],
-    posts: []
+    posts: [],
+    post:{}
 }
 
 const admin= (state = defualtState, action)=>{
@@ -20,7 +21,12 @@ const admin= (state = defualtState, action)=>{
                 ...state,
                 posts: state.posts.concat(action.payload)
             }
-            
+        case 'GOT_SINGLE_POST':
+            return{
+                ...state,
+                post: action.payload
+            }
+
         default:
             return state
     }

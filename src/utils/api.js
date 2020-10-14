@@ -27,6 +27,12 @@ const API= {
         .then(res=>{
             success(res);
         })
+    },
+    getSinglePost: (id,token,success)=>{
+        axios.get(`${host}/api/posts/${id}?access_token=${token}`)
+        .then(res=>{
+            success(res);
+        })
     }
 };
 
