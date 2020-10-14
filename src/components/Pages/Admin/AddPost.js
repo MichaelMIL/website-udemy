@@ -52,6 +52,17 @@ class AddPost extends Component{
             const post = this.props.admin.posts.filter(p=> p.title === this.props.values.title)[0];
             this.props.history.push('/admin/posts/edit/'+post.dispatch);
         }
+
+        if(this.props.admin.post.id !== props.admin.post.id){
+            // when redux state changes post in admin reducer
+            this.props.setValues(this.props.admin.post);
+        }
+    }
+
+    componentDidMount(props, state){
+        if(this.props.match.params.view === 'edit' && this.props.match.params.id){
+            this.props.getSinglePost(this.props.match.params.id, this.props.auth.token)
+        }
     }
 
     render(){
@@ -120,24 +131,29 @@ const mapStateToProps = state =>{
     }
 
 }
-const mapDispatchToProps= dispatch=>{
-  return{
+const mapDispatchToProps= dispatch=>({
         addPost: (post,token)=>{
             dispatch(AdminActions.addPost(post, token));
+        },
+        updatePost:(post,token)=>{
+            dispatch(AdminActions.updatePost(post,token));
+        },
+        getSinglePost:(id,token)=>{
+            dispatch(AdminActions.getSinglePost(id,token));
         }
-    }
-  }
+});
+
 
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
 )(withFormik({
-    mapPropsToValues: ()=> ({
-        title: '', 
-        slug: '',
-        createAt: '',
-        status: false,
-        cintent: ''
+    mapPropsToValues: (props)=> ({
+        title: props.admin.post.title || '', 
+        slug: props.admin.post.slug || '',
+        createAt: props.admin.post.createdAt || '',
+        status: props.admin.post.status || false,
+        content: props.admin.post.content || ''
     }),
     validationSchema: Yup.object().shape({
         title: Yup.string().required('Title is required'),
@@ -146,8 +162,18 @@ export default withRouter(connect(
         
     }),
     handleSubmit: (values, {setSubmitting,props})=> {
-        console.log('saving', props.addPost);
-        props.addPost(values, props.auth.token);
+        switch(props.match.params.view){
+            case 'add':
+                return props.addPost(values, props.auth.token);
+            case 'edit':
+                const post ={ 
+                    ...values,
+                    id: props.match.params.id
+                }
+                console.log('update', post);
+                return props.updatePost(post, props.auth.token);
+        }
+        
     }
 
 })(withStyles(styles)(AddPost))));

@@ -33,6 +33,12 @@ const API= {
         .then(res=>{
             success(res);
         })
+    },
+    updatePost: (post,token,success)=>{
+        axios.patch(`${host}/api/posts/${post.id}?access_token=${token}`, post)
+        .then(res=>{
+            success(res);
+        })
     }
 };
 

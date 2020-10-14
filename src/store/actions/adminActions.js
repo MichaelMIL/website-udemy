@@ -44,3 +44,14 @@ export const getSinglePost = (id, token)=>{
         })
     }
 }
+
+export const updatePost = (post,token)=>{
+    return dispatch=>{
+        API.updatePost(post,token,res=>{
+            dispatch({
+                type:'POST_UPDATED',
+                payload: res.data
+            })
+        })
+    }
+}

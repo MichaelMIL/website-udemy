@@ -31,6 +31,7 @@ class Posts extends Component{
 
     render(){
         const posts = this.props.admin.posts;
+        console.log(posts)
         const {classes} = this.props;
         return(
             <div>
