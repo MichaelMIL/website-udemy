@@ -11,22 +11,35 @@ const admin= (state = defualtState, action)=>{
                 ...state,
                 users: action.payload 
             }
+            
         case 'GOT_POSTS':
             return{
                 ...state,
                 posts: action.payload
             }
+
         case 'POST_ADDED':
             return{
                 ...state,
                 posts: state.posts.concat(action.payload),
                 post: action.payload
             }
+
         case 'GOT_SINGLE_POST':
             return{
                 ...state,
                 post: action.payload
             }
+
+        case 'UPLOADED_IMAGE':
+            return{
+                ...state,
+                post:{
+                    ...state.post,
+                    PostImage: [action.payload]
+                }
+            }
+
         case 'POST_UPDATED':
             return{
                 ...state,

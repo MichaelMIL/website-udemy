@@ -55,3 +55,14 @@ export const updatePost = (post,token)=>{
         })
     }
 }
+
+export const uploadImage = (data,token,posdId,userId)=>{
+    return dispatch=>{
+        API.uploadImage(data,token,posdId,userId,res=>{
+            dispatch({
+                type:'UPLOADED_IMAGE',
+                payload: res.data
+            })
+        })
+    }
+}
