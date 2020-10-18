@@ -1,0 +1,16 @@
+const defualtState= {
+    posts:[]
+}
+const site = (state = defualtState , action)=>{
+    switch(action.type){
+        case 'GOT_SITE_POSTS':
+            return{
+                ...state,
+                posts: action.skip ? state.posts.concat(action.payload) : action.payload
+            }
+        default:
+            return state
+    }
+}
+
+export default site;

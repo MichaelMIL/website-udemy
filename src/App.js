@@ -8,6 +8,8 @@ import Home from './components/Pages/Home';
 import About from './components/Pages/About';
 import Contact from './components/Pages/Contact';
 import Login from './components/Pages/Login';
+import Blog from './components/Pages/Blog';
+import Single from './components/Pages/Single'
 
 //admin pages
 import Dashboard from './components/Pages/Admin/Dashboard';
@@ -154,6 +156,24 @@ class App extends Component{
               render= {props=>(
                 <PageWrapper>
                   <Home {...props} />
+                </PageWrapper>
+              )}
+            />
+
+            <Route
+              path="/blog/:slug"
+              render= {props=>(
+                <PageWrapper>
+                  <Single {...props} />
+                </PageWrapper>
+              )}
+            />
+            
+            <Route
+              path="/blog"
+              render= {props=>(
+                <PageWrapper>
+                  <Blog {...props} />
                 </PageWrapper>
               )}
             />

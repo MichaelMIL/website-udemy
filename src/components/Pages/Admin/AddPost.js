@@ -11,6 +11,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import {withRouter} from 'react-router-dom';
 import ImageIcon from '@material-ui/icons/Image';
 import API from '../../../utils/api';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 //import FormItems from '../../Common/FormItems';
 
 
@@ -82,6 +84,25 @@ class AddPost extends Component{
             this.props.getSinglePost(this.props.match.params.id, this.props.auth.token)
         }
     }
+    modules = {
+        toolbar:[
+            ['bold','italic','underline','strike'],
+            [{'header':1},{'header':2}],
+            [{'list':'ordered'},{'list':'bullet'}],
+            [{'indent':'-1'},{'indent':'+1'}],
+            [{'size':['small','medium','large','huge',]}],
+            [{ 'color': [] }, { 'background': [] }],  
+            ['link', 'image'],
+            ['clean']
+
+        ]
+    }
+    formats =[
+        'header',
+        'bold','italic','underline','strike','script',
+        'list', 'bullet', 'indent',
+        'link','color','code-block', 'image'
+    ]
 
     render(){
         const {classes} = this.props;
@@ -106,14 +127,15 @@ class AddPost extends Component{
                             name="slug"
                             label="Slug"
                             margin="normal"
-                            fullWidth
                        />
-                        <FormikTextField 
-                            name="content"
-                            label="Content"
-                            margin="normal"
-                            fullWidth
-                        />
+
+                       <ReactQuill 
+                            value= {this.props.values.content}
+                            modules= {this.modules}
+                            formats= {this.formats}
+                            placeholder="Write something"
+                            onChange={val=> this.props.setFieldValue('content', val)}
+                       />
                    </Paper>
                    <Paper className={classes.rightSide}>
                        <FormikSelectField 

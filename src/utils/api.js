@@ -24,6 +24,20 @@ const API= {
             success(res);
         })
     },
+    getSitePosts : (skip, success)=>{
+        axios.get(`${host}/api/posts`,{
+            params:{
+                filter:{
+                    skip: skip,
+                    limit: 10,
+                    include: 'PostImage'
+                }
+            }
+        })
+        .then(res=>{
+            success(res);
+        })
+    },
     addPost: (post, token ,success)=>{
         console.log("we are adding", post)
         axios.post(`${host}/api/posts?access_token=${token}`, post)
