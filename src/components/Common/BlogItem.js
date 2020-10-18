@@ -8,7 +8,7 @@ class BlogItem extends Component{
         return(
             <div className="col-lg-4 col-sm-6 mb-4">
                 <div className="portfolio-item">
-                    <Link className="portfolio-link" data-toggle="modal" to={`/blog/${this.props.post.slug}`}>
+                    <Link className="portfolio-link" to={`/blog/${this.props.post.slug}`}>
                         <div className="portfolio-hover">
                             <div className="portfolio-hover-content"><i className="fas fa-plus fa-3x"></i></div>
                         </div>
