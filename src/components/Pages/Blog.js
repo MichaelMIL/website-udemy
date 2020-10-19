@@ -9,6 +9,7 @@ import BlogItem from '../Common/BlogItem';
 class Blog extends Component{
     componentDidMount(){
         this.props.getPosts(0);
+        this.props.getPostCount();
     }
 
     render(){
@@ -36,6 +37,17 @@ class Blog extends Component{
                         :null }
                             
                         </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="text-center">
+                                    {this.props.site.postCount > this.props.site.posts.length ?
+                                        <button className="btn btn-default" onClick={e=>{
+                                            this.props.getPosts(this.props.site.posts.length);
+                                        }}> Load More</button>
+                                    :null}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -53,6 +65,9 @@ const mapStateToProps = state=>({
 const mapDispatchToProps = dispatch=>({
     getPosts:(skip)=>{
         dispatch(SiteActions.getPosts(skip));
+    },
+    getPostCount: ()=>{
+        dispatch(SiteActions.getPostCount());
     }
 })
 

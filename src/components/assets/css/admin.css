@@ -18,3 +18,6 @@
     font-size: 22px;
     margin-bottom: 20px;
 }
+.post-content {
+    max-width: 100%;
+}

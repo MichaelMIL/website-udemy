@@ -29,8 +29,14 @@ const API= {
             params:{
                 filter:{
                     skip: skip,
-                    limit: 10,
-                    include: 'PostImage'
+                    limit: 3,
+                    include: 'PostImage',
+                    fields:{
+                        id: true,
+                        title: true,
+                        slug: true
+                    
+                    }
                 }
             }
         })
@@ -57,6 +63,12 @@ const API= {
             success(res);
         })
     },
+    getPostCount:(success)=>{
+        axios.get(`${host}/api/posts/count`)
+        .then(res=>{
+            success(res);
+        })
+    },
     updatePost: (post,token,success)=>{
         axios.patch(`${host}/api/posts/${post.id}?access_token=${token}`, post)
         .then(res=>{
@@ -65,6 +77,18 @@ const API= {
     },
     uploadImage: (data,token,postId,userId, success)=>{
         axios.post(`${host}/api/PostImages/upload?post_id=${postId}&access_token=${token}&user_id=${userId}`, data)
+        .then(res=>{
+            success(res);
+        })
+    },
+    getPostBySlug: (slug,token, success)=>{
+        axios.get(`${host}/api/Posts/findOne?access_token=${token}`, {
+            params:{
+                filter:{
+                    where:{slug: slug}
+                }
+            }
+        })
         .then(res=>{
             success(res);
         })

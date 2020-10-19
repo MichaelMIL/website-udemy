@@ -170,6 +170,7 @@ class App extends Component{
             />
             
             <Route
+              exact={true}
               path="/blog"
               render= {props=>(
                 <PageWrapper>

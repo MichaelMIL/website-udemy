@@ -1,5 +1,7 @@
 const defualtState= {
-    posts:[]
+    posts:[],
+    postCount:0,
+    post:{}
 }
 const site = (state = defualtState , action)=>{
     switch(action.type){
@@ -8,9 +10,28 @@ const site = (state = defualtState , action)=>{
                 ...state,
                 posts: action.skip ? state.posts.concat(action.payload) : action.payload
             }
+        case 'GOT_POST_COUNT':
+            return{
+                ...state,
+                postCount: action.payload
+            }
+        case 'SET_DEFAULT_POST_DATA':
+            return{
+                ...state,
+                post: action.payload
+            }
+        case 'SET_FULL_POST_DATA':
+            return{
+                ...state,
+                post:{
+                    ...state.post,
+                    ...action.payload
+                }
+            }
         default:
             return state
     }
 }
+
 
 export default site;
