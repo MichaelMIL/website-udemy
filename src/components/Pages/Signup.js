@@ -7,26 +7,27 @@ import * as AuthActions from '../../store/actions/authActions';
 
 const fields =[
     {name: 'email', elementName: 'input', type: 'email', placeholder: 'Your Email'},
-    {name: 'password', elementName: 'input', type: 'password', placeholder: 'Your Password'}
+    {name: 'name', elementName: 'input', type: 'text', placeholder: 'Your Name'},
+    {name: 'password', elementName: 'input', type: 'password', placeholder: 'Your Password'},
+    {name: 'password2', elementName: 'input', type: 'password', placeholder: 'Your Password (again)'}
 ]
 
-class Login extends Component{
+class Signup extends Component{
     render(){
         return(
             <div className="login-page">
                 <div className="contaainer">
                     <div className="login-form">
                         <div className="row">
-                            <h1>Login</h1>
+                            <h1>Sign-Up</h1>
                         </div>
-                        <div className="row">
                             <form className="row" onSubmit={e=>{
                                 e.preventDefault();
-                                this.props.login(this.props.values.email, this.props.values.password);
+                                this.props.register(this.props.values.name, this.props.values.email, this.props.values.password);
                             }}>
                                 {fields.map((f,i)=>{
                                     return (
-                                        <div className="col-md-12">
+                                        <div className="col-md-6">
                                             <Field 
                                                 key={i}
                                                 {...f}
@@ -41,10 +42,10 @@ class Login extends Component{
                                     )
                                 })}
                                 <div className="col-md-12">
-                                    <button className='btn btn-primary text-uppercase'>Login</button>
+                                    <p className="text-danger text-center">{this.props.auth.error || ''}</p>
+                                    <button className='btn btn-primary text-uppercase'>Sign up</button>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -60,8 +61,8 @@ const mapStateToProps = state=>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        login: (email, pass)=>{
-            dispatch(AuthActions.login(email,pass));
+        register: (name, email, pass)=>{
+            dispatch(AuthActions.register(name, email,pass));
         }
     }
 };
@@ -72,14 +73,18 @@ export default connect(
 )(withFormik({
     mapPropsToValues: ()=>({
         email:'',
-        password:''
+        name:'',
+        password:'',
+        password2:''
     }),
     validationSchema: Yup.object().shape({
-        email: Yup.string()
-        .email("Invalide email")
-        .required("You must have an email")
-        ,
-        password: Yup.string().required("Ypu must enter password")
+        name: Yup.string().min(3, "You must have a longer name").required("We need your name"),
+        email: Yup.string().email("Invalide email").required("You must have an email"),
+        password: Yup.string().min(6,'Password must have 8 chracters').required("You must enter password"),
+        password2: Yup.string().required('Re enter your password').test('pass-match','Passwords are not equal', function(value){
+            const {password} = this.parent;
+            return password === value;
+        })
         
     }),
     handleSubmit: (values, {setSubmitting}, login)=>{
@@ -87,4 +92,4 @@ export default connect(
         //login(values.email, values.pass);
     }
 })
-(Login));
+(Signup));

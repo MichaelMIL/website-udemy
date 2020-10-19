@@ -3,9 +3,8 @@ import { Link }  from 'react-router-dom';
 
 
 class PageWrapper extends Component{
-
+    
     render(){
-
         return(
             <div>
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -23,6 +22,22 @@ class PageWrapper extends Component{
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/about">About</Link ></li>
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/team">Team</Link ></li>
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/contact">Contact</Link ></li>
+                        {!this.props.children._self.props.auth.token ? 
+                            <div className="navbar-nav text-uppercase ml-auto">
+                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/signup">Sign up</Link ></li>
+                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/login">login</Link ></li>
+                            </div>
+                        : 
+                        this.props.children._self.props.auth.profile?
+                            <div className="navbar-nav text-uppercase ml-auto">
+                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/">{this.props.children._self.props.auth.profile.name}</Link ></li>
+                            </div>
+                            : 
+                            <div className="navbar-nav text-uppercase ml-auto">
+                            <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/signup">Sign up</Link ></li>
+                            <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/login">login</Link ></li>
+                        </div>
+                        }
                     </ul>
                 </div>
             </div>

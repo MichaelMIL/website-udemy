@@ -5,7 +5,7 @@ export const getUsers = (token)=>{
         API.getUsers(token, res=>{
             dispatch({
                 type: 'GOT_USERS',
-                payloag: res.data
+                payload: res.data
             })
         })
     }

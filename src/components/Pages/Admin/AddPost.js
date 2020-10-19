@@ -103,7 +103,7 @@ class AddPost extends Component{
         'list', 'bullet', 'indent',
         'link','color','code-block', 'image'
     ]
-
+    
     render(){
         const {classes} = this.props;
         return(
@@ -153,13 +153,14 @@ class AddPost extends Component{
                                 variant="contained"  
                                 color="secondary"
                                 onClick={e=>{
+                                    this.props.setFieldValue('createAt', new Date().toLocaleString('he-il'));
                                     this.props.handleSubmit();
                                 }}
                                 > <SaveIcon/> Save</Button>
                         </div>
                         {this.props.admin.post.PostImage ?
                             this.props.admin.post.PostImage.length > 0 ?
-                                <img src={API.makeFileURL(this.props.admin.post.PostImage[0].url, this.props.auth.token)} className={classes.PostImage}/>
+                                <img src={API.makeFileURL(this.props.admin.post.PostImage[0].url, this.props.auth.token)} className={classes.PostImage} alt=""/>
                                 :null
                             : null
                             }
