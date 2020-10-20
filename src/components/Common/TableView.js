@@ -35,11 +35,18 @@ class TableView extends Component{
                                             columns.map((col, colIndex)=>{
                                                 return(
                                                     <TableCell>
-                                                        {col.name === 'id'?
-                                                            <Link to={`/admin/posts/edit/${row[col.name]}`} component={RouterLink}>
-                                                                {row[col.name]}
-                                                            </Link>
+                                                        {this.props.type ===  'post' ?
+                                                            col.name === 'id' ?
+                                                                <Link to={`/admin/posts/edit/${row[col.name]}`} component={RouterLink}>
+                                                                    {row[col.name]}
+                                                                </Link>
                                                             : row[col.name] 
+                                                            :                                                           
+                                                            col.name === 'id' ?
+                                                                <Link to={`/admin/users/edit/${row[col.name]}`} component={RouterLink}>
+                                                                    {row[col.name]}
+                                                                </Link>
+                                                        : row[col.name] 
                                                         }
                                                         
                                                     </TableCell>

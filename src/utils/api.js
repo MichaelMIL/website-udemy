@@ -12,8 +12,14 @@ const API= {
     makeFileURL: (url, token)=>{
         return host+url+'?access_token='+token;
     },
-     login : (email,pass, success)=>{
+    login : (email,pass, success)=>{
         axios.post(`${host}/api/users/login`, {email: email, password:pass})
+        .then(res=>{
+            success(res);
+        });
+    },
+    loginAdmin : (email,pass, success)=>{
+        axios.post(`${host}/api/adminusers/login`, {email: email, password:pass})
         .then(res=>{
             success(res);
         });
@@ -25,6 +31,26 @@ const API= {
         })
         .catch(err=>{
             success(err);
+        })
+    },
+    registerAdmin: (name,email,pass,token,success)=>{
+        axios.post(`${host}/api/adminusers`, {name: name,email: email, password: pass})
+        .then((token,res)=>{
+            success(res);
+            console.log("making admin")
+            axios.post(`${host}/api/adminusers/newAdmin?access_token=${token}`, {user_id: res.data.id})
+            .then(res=>{
+                success(res);
+            })
+        })
+        .catch(err=>{
+            success(err);
+        })
+    },
+    setAdmin:(token, userId, success)=>{
+        axios.post(`${host}/api/adminusers/newAdmin?access_token=${token}`, {user_id: userId})
+        .then(res=>{
+            success(res);
         })
     },
     getUserById : (userId, token, success)=>{

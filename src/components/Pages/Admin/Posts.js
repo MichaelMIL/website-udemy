@@ -31,7 +31,6 @@ class Posts extends Component{
 
     render(){
         const posts = this.props.admin.posts;
-        console.log(posts)
         const {classes} = this.props;
         return(
             <div>
@@ -39,6 +38,7 @@ class Posts extends Component{
                 <TableView 
                     columns={columns}
                     rows={posts}
+                    type='post'
                 />
                 <Fab component={RouterLink} to="/admin/posts/add" color="secondary"  aria-label="Add" className={classes.fab}>
                     <EditIcon/>

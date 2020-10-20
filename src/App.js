@@ -17,9 +17,11 @@ import Dashboard from './components/Pages/Admin/Dashboard';
 import Users from './components/Pages/Admin/Users';
 import Posts from './components/Pages/Admin/Posts';
 import AddPost from './components/Pages/Admin/AddPost';
+import AddUser from './components/Pages/Admin/AddUser';
+import LoginAdmin from './components/Pages/Admin/LoginAdmin';
 
 import AdminWrapper from './components/AdminWrapper';
-import LoginWrapper from './components/LoginWrapper'
+import LoginWrapper from './components/LoginWrapper';
 
 
 class App extends Component{
@@ -27,8 +29,56 @@ class App extends Component{
     return (
       <Router>
 
+        <Route 
+          path="/admin/user/:view/:id"
+          render= {props=>{
+            console.log("props: ", props);
+            return(
+
+              <div>            
+                {this.props.auth.token ?
+                  <AdminWrapper>
+                    <AddUser/>
+                  </AdminWrapper>
+                  : 
+                  <LoginWrapper>
+                    <LoginAdmin/>
+                  </LoginWrapper>
+                }
+
+              </div>
+           
+            )
+          }
+        }
+        />
+        <Route 
+          exact = {true}
+          path="/admin/users/:view"
+          render= {props=>{
+            console.log("props: ", props);
+            return(
+
+              <div>            
+                {this.props.auth.token ?
+                  <AdminWrapper>
+                    <AddUser/>
+                  </AdminWrapper>
+                  : 
+                  <LoginWrapper>
+                    <LoginAdmin/>
+                  </LoginWrapper>
+                }
+
+              </div>
+           
+            )
+          }
+        }
+        />
 
         <Route 
+          exact = {true}
           path="/admin/users"
           render= {props=>{
             console.log("props: ", props);
@@ -41,7 +91,7 @@ class App extends Component{
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
-                    <Login/>
+                    <LoginAdmin/>
                   </LoginWrapper>
                 }
 
@@ -65,7 +115,7 @@ class App extends Component{
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
-                    <Login/>
+                    <LoginAdmin/>
                   </LoginWrapper>
                 }
 
@@ -89,7 +139,7 @@ class App extends Component{
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
-                    <Login/>
+                    <LoginAdmin/>
                   </LoginWrapper>
                 }
 
@@ -115,7 +165,7 @@ class App extends Component{
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
-                    <Login/>
+                    <LoginAdmin/>
                   </LoginWrapper>
                 }
 
@@ -176,7 +226,7 @@ class App extends Component{
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
-                    <Login/>
+                    <LoginAdmin/>
                   </LoginWrapper>
                 }
 

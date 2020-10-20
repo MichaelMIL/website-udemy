@@ -17,7 +17,18 @@ const admin= (state = defualtState, action)=>{
                 ...state,
                 posts: action.payload
             }
-
+        case 'AFTER_LOGIN':{
+                return{
+                    ...state,
+                    user: action.payload,
+                }
+            }
+        case 'LOGIN': 
+            return{
+                ...state,
+                user: action.payload,
+                token: action.payload.token
+            }
         case 'POST_ADDED':
             return{
                 ...state,
@@ -39,7 +50,11 @@ const admin= (state = defualtState, action)=>{
                     PostImage: [action.payload]
                 }
             }
-
+        case 'SHOW_ERROR':
+            return{
+                ...state,
+                error: action.payload
+            }
         case 'POST_UPDATED':
             return{
                 ...state,
