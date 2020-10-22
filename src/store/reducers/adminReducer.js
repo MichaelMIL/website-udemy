@@ -1,6 +1,9 @@
 const defualtState = {
     users: [],
     posts: [],
+    user: {},
+    token: null,
+    error: null,
     post:{}
 }
 
@@ -40,6 +43,10 @@ const admin= (state = defualtState, action)=>{
             return{
                 ...state,
                 post: action.payload
+            }
+        case 'SET_TO_ADMIN':
+            return{
+                ...state
             }
 
         case 'UPLOADED_IMAGE':

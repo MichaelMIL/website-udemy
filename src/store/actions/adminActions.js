@@ -71,7 +71,8 @@ export const registerAdmin = (name, email, pass,token)=>{
     return dispatch=>{
         API.registerAdmin(name,email,pass,token, res=>{
             if(res.status === 200){
-
+                console.log("RES", res);
+                dispatch(setAdmin(token,res.data.id));
             }else{
                 if(res.message){
                     dispatch({
@@ -85,6 +86,8 @@ export const registerAdmin = (name, email, pass,token)=>{
         payload: {email,pass}*/
     }
 }
+
+
 
 export const login = (email, pass)=>{
     return (dispatch)=>{
@@ -108,4 +111,15 @@ export const login = (email, pass)=>{
         })
     }
 
+}
+
+export const setAdmin = (token, userId)=>{
+    return dispatch=>{
+        API.setAdmin(token,userId,res=>{
+            dispatch({
+                type:'SET_TO_ADMIN',
+                payload: res.data
+            })
+        })
+    }
 }

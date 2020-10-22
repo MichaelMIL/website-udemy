@@ -33,15 +33,10 @@ const API= {
             success(err);
         })
     },
-    registerAdmin: (name,email,pass,token,success)=>{
+    registerAdmin: (name,email,token, pass,success)=>{
         axios.post(`${host}/api/adminusers`, {name: name,email: email, password: pass})
-        .then((token,res)=>{
+        .then(res=>{
             success(res);
-            console.log("making admin")
-            axios.post(`${host}/api/adminusers/newAdmin?access_token=${token}`, {user_id: res.data.id})
-            .then(res=>{
-                success(res);
-            })
         })
         .catch(err=>{
             success(err);
