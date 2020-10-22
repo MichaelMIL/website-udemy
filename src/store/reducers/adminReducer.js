@@ -48,7 +48,11 @@ const admin= (state = defualtState, action)=>{
             return{
                 ...state
             }
-
+        case 'REGISTER':
+            return{
+                ...state,
+                adminId: action.payload.id
+            }
         case 'UPLOADED_IMAGE':
             return{
                 ...state,

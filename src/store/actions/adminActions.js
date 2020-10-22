@@ -67,11 +67,14 @@ export const uploadImage = (data,token,posdId,userId)=>{
     }
 }
 
-export const registerAdmin = (name, email, pass,token)=>{
+export const registerAdmin = (name, email, pass)=>{
     return dispatch=>{
-        API.registerAdmin(name,email,pass,token, res=>{
+        API.registerAdmin(name,email,pass, res=>{
             if(res.status === 200){
-                dispatch(setAdmin(token,res.data.id));
+                dispatch({
+                    type: 'REGISTER',
+                    payload: res.data
+                })
             }else{
                 if(res.message){
                     dispatch({

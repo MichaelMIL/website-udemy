@@ -19,6 +19,7 @@ const API= {
         });
     },
     loginAdmin : (email,pass, success)=>{
+        console.log("email& pass", email,pass)
         axios.post(`${host}/api/adminusers/login`, {email: email, password:pass})
         .then(res=>{
             success(res);
@@ -33,7 +34,7 @@ const API= {
             success(err);
         })
     },
-    registerAdmin: (name,email,token, pass,success)=>{
+    registerAdmin: (name,email, pass,success)=>{
         axios.post(`${host}/api/adminusers`, {name: name ,email: email, password: pass})
         .then(res=>{
             success(res);

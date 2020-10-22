@@ -25,7 +25,8 @@ class AddUser extends Component{
                         </div>
                             <form className="row" onSubmit={e=>{
                                 e.preventDefault();
-                                this.props.registerAdmin(this.props.values.name, this.props.values.email, this.props.values.password,this.props.auth.token);
+                                this.props.registerAdmin(this.props.values.name, this.props.values.email, this.props.values.password);
+                                this.props.setAdmin(this.props.auth.token, this.props.admin.adminId);
                             }}>
                                 {fields.map((f,i)=>{
                                     return (
@@ -65,8 +66,11 @@ const mapStateToProps = state=>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        registerAdmin: ( name, email, pass,token)=>{
-            dispatch(AdminActions.registerAdmin(name, email, pass,token));
+        registerAdmin: ( name, email, pass)=>{
+            dispatch(AdminActions.registerAdmin(name, email, pass));
+        },
+        setAdmin: (token, userId)=>{
+            dispatch(AdminActions.setAdmin(token, userId));
         }
     }
 };
