@@ -10,19 +10,19 @@ const fields =[
     {name: 'password', elementName: 'input', type: 'password', placeholder: 'Your Password'}
 ]
 
-class Login extends Component{
+class LoginAdmin extends Component{
     render(){
         return(
             <div className="login-page">
                 <div className="contaainer">
                     <div className="login-form">
                         <div className="row">
-                            <h1>Login</h1>
+                            <h1>Login-Admin</h1>
                         </div>
                         <div className="row">
                             <form className="row" onSubmit={e=>{
                                 e.preventDefault();
-                                this.props.login(this.props.values.email, this.props.values.password);
+                                this.props.loginAdmin(this.props.values.email, this.props.values.password);
                             }}>
                                 {fields.map((f,i)=>{
                                     return (
@@ -60,8 +60,8 @@ const mapStateToProps = state=>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        login: (email, pass)=>{
-            dispatch(AdminActions.login(email,pass));
+        loginAdmin: (email, pass)=>{
+            dispatch(AdminActions.loginAdmin(email,pass));
         }
     }
 };
@@ -87,4 +87,4 @@ export default connect(
         //login(values.email, values.pass);
     }
 })
-(Login));
+(LoginAdmin));

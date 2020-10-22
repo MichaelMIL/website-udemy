@@ -34,7 +34,7 @@ const API= {
         })
     },
     registerAdmin: (name,email,token, pass,success)=>{
-        axios.post(`${host}/api/adminusers`, {name: name,email: email, password: pass})
+        axios.post(`${host}/api/adminusers`, {name: name ,email: email, password: pass})
         .then(res=>{
             success(res);
         })
@@ -56,6 +56,12 @@ const API= {
                 }
             }
         })
+        .then(res=>{
+            success(res);
+        })
+    },
+    getAdminUserById : (userId, token, success)=>{
+        axios.get(`${host}/api/adminusers/${userId}?access_token=${token}`)
         .then(res=>{
             success(res);
         })

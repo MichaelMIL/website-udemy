@@ -71,7 +71,6 @@ export const registerAdmin = (name, email, pass,token)=>{
     return dispatch=>{
         API.registerAdmin(name,email,pass,token, res=>{
             if(res.status === 200){
-                console.log("RES", res);
                 dispatch(setAdmin(token,res.data.id));
             }else{
                 if(res.message){
@@ -89,10 +88,10 @@ export const registerAdmin = (name, email, pass,token)=>{
 
 
 
-export const login = (email, pass)=>{
+export const loginAdmin = (email, pass)=>{
+    console.log("logging in", email, pass)
     return (dispatch)=>{
         API.loginAdmin(email,pass,res =>{
-            console.log("resualt", res);
             dispatch({
                         type: 'LOGIN',
                         payload: {
@@ -102,7 +101,7 @@ export const login = (email, pass)=>{
                         }
             })
 
-            API.getUserById(res.data.userId, res.data.id, res2=>{
+            API.getAdminUserById(res.data.userId, res.data.id, res2=>{
                 dispatch({
                     type: 'AFTER_LOGIN',
                     payload: res2.data
