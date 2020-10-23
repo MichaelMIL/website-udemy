@@ -19,6 +19,18 @@ const API= {
             success(res);
         });
     },
+    logout : (token, success)=>{
+        axios.post(`${host}/api/users/logout?access_token=${token}`)
+        .then(res=>{
+            success(res);
+        });
+    },
+    logoutAdmin : (token, success)=>{
+        axios.post(`${host}/api/adminusers/logout?access_token=${token}`)
+        .then(res=>{
+            success(res);
+        });
+    },
     register: (name,email,pass,success)=>{
         axios.post(`${host}/api/users`, {name: name,email: email, password: pass})
         .then(res=>{

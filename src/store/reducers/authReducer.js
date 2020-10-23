@@ -13,6 +13,12 @@ const auth = (state = defualtState , action)=>{
                 user: action.payload,
                 token: action.payload.token
             }
+        case 'LOGOUT': 
+            return{
+                ...state,
+                user: null,
+                token: null
+            }
         case 'SHOW_ERROR':
             return{
                 ...state,

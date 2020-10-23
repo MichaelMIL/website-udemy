@@ -125,3 +125,22 @@ export const setAdmin = (token, userId)=>{
         })
     }
 }
+
+
+export const logoutAdmin = (token)=>{
+    return dispatch=>{
+        API.logoutAdmin(token, res=>{
+            dispatch({
+                type: 'LOGOUT',
+                payload: {
+                    email: null,
+                    token: null,
+                    user_id: null
+                }
+    })
+        })
+        /*type: 'REGISTER',
+        payload: {email,pass}*/
+    }
+}
+

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link }  from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import * as AuthActions from '../store/actions/authActions';
 
 class PageWrapper extends Component{
     
@@ -31,11 +32,15 @@ class PageWrapper extends Component{
                         this.props.children._self.props.auth.profile?
                             <div className="navbar-nav text-uppercase ml-auto">
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/">{this.props.children._self.props.auth.profile.name}</Link ></li>
+                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/" onClick={e=>{
+                                this.props.logout(this.props.auth.token);
+                            }}>logout</Link ></li>
                             </div>
                             : 
                             <div className="navbar-nav text-uppercase ml-auto">
-                            <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/signup">Sign up</Link ></li>
-                            <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/login">login</Link ></li>
+                            <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/" onClick={e=>{
+                                this.props.logout(this.props.auth.token);
+                            }}>logout</Link ></li>
                         </div>
                         }
                     </ul>
@@ -49,4 +54,23 @@ class PageWrapper extends Component{
     }
 }
 
-export default PageWrapper;
+const mapStateToProps = state=>{
+    return{
+        auth: state.auth
+    }
+};
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        logout:(token)=>{
+            dispatch(AuthActions.logout(token))
+        }
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PageWrapper);
+
+

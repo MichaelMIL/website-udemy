@@ -14,7 +14,12 @@ const admin= (state = defualtState, action)=>{
                 ...state,
                 users: action.payload 
             }
-            
+        case 'LOGOUT': 
+            return{
+                ...state,
+                user: null,
+                token: null
+            }
         case 'GOT_POSTS':
             return{
                 ...state,

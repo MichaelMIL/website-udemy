@@ -42,3 +42,21 @@ export const register = (name, email,pass)=>{
         payload: {email,pass}*/
     }
 }
+
+export const logout = (token)=>{
+    return dispatch=>{
+        API.logout(token, res=>{
+            dispatch({
+                type: 'LOGOUT',
+                payload: {
+                    email: null,
+                    token: null,
+                    user_id: null
+                }
+    })
+        })
+        /*type: 'REGISTER',
+        payload: {email,pass}*/
+    }
+}
+
