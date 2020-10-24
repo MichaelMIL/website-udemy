@@ -106,7 +106,6 @@ const API= {
         })
     },
     addPost: (post, token ,success)=>{
-        console.log("we are adding", post)
         axios.post(`${host}/api/posts?access_token=${token}`, post)
         .then(res=>{
             success(res);
@@ -132,6 +131,12 @@ const API= {
     },
     updatePost: (post,token,success)=>{
         axios.patch(`${host}/api/posts/${post.id}?access_token=${token}`, post)
+        .then(res=>{
+            success(res);
+        })
+    },
+    updateUser: (user,token,success)=>{
+        axios.patch(`${host}/api/users/${user.id}?access_token=${token}`, user)
         .then(res=>{
             success(res);
         })

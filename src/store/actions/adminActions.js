@@ -11,6 +11,17 @@ export const getUsers = (token)=>{
     }
 }
 
+export const getUserById = (id, token)=>{
+    return dispatch=>{
+        API.getUserById(id,token,res=>{
+            dispatch({
+                type: 'GOT_SINGLE_USER',
+                payload : res.data
+            })
+        })
+    }
+}
+
 
 export const getPosts = (token)=>{
     return (dispatch)=>{
@@ -50,6 +61,17 @@ export const updatePost = (post,token)=>{
         API.updatePost(post,token,res=>{
             dispatch({
                 type:'POST_UPDATED',
+                payload: res.data
+            })
+        })
+    }
+}
+
+export const updateUser = (user,token)=>{
+    return dispatch=>{
+        API.updateUser(user,token,res=>{
+            dispatch({
+                type:'USER_UPDATED',
                 payload: res.data
             })
         })

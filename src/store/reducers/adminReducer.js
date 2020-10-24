@@ -48,6 +48,11 @@ const admin= (state = defualtState, action)=>{
             return{
                 ...state,
                 post: action.payload
+            }       
+        case 'GOT_SINGLE_USER':
+            return{
+                ...state,
+                user: action.payload
             }
         case 'SET_TO_ADMIN':
             return{
@@ -79,6 +84,25 @@ const admin= (state = defualtState, action)=>{
                     ...action.payload
                 },
                 posts: state.posts.map(p=>{
+                    if(p.id === action.payload.id){
+                        // this is the exisiting post in redux that has been update
+                        return{
+                            ...p,
+                            ...action.payload
+                        }
+                    } else {
+                        return p;
+                    }
+                })
+            }
+        case 'USER_UPDATED':
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    ...action.payload
+                },
+                users: state.users.map(p=>{
                     if(p.id === action.payload.id){
                         // this is the exisiting post in redux that has been update
                         return{

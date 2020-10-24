@@ -17,7 +17,7 @@ import Dashboard from './components/Pages/Admin/Dashboard';
 import Users from './components/Pages/Admin/Users';
 import Posts from './components/Pages/Admin/Posts';
 import AddPost from './components/Pages/Admin/AddPost';
-import AddUser from './components/Pages/Admin/AddUser';
+import EditUser from './components/Pages/Admin/EditUser';
 import LoginAdmin from './components/Pages/Admin/LoginAdmin';
 
 import AdminWrapper from './components/AdminWrapper';
@@ -30,7 +30,7 @@ class App extends Component{
       <Router>
 
         <Route 
-          path="/admin/user/:view/:id"
+          path="/admin/users/:view/:id"
           render= {props=>{
             console.log("props: ", props);
             return(
@@ -38,7 +38,7 @@ class App extends Component{
               <div>            
                 {this.props.auth.token ?
                   <AdminWrapper>
-                    <AddUser/>
+                    <EditUser/>
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
@@ -62,7 +62,7 @@ class App extends Component{
               <div>            
                 {this.props.auth.token ?
                   <AdminWrapper>
-                    <AddUser/>
+                    <EditUser/>
                   </AdminWrapper>
                   : 
                   <LoginWrapper>
