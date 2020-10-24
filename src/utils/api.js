@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const host = 'http://localhost:8080'
+const host;
+if(process.env.NODE_ENV === 'deelopment') {
+    host = 'http://localhost:8080'
+} else{
+    host= 'http://api.example.com'
+}
 
 const API= {
     makeFileURL: (url, token)=>{
