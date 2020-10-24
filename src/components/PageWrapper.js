@@ -23,13 +23,13 @@ class PageWrapper extends Component{
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/about">About</Link ></li>
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/team">Team</Link ></li>
                         <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/contact">Contact</Link ></li>
-                        {!this.props.children._self.props.auth.token ? 
+                        {!this.props.auth.token ? 
                             <div className="navbar-nav text-uppercase ml-auto">
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/signup">Sign up</Link ></li>
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/login">login</Link ></li>
                             </div>
                         : 
-                        this.props.children._self.props.auth.profile?
+                        this.props.auth.profile?
                             <div className="navbar-nav text-uppercase ml-auto">
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/">{this.props.children._self.props.auth.profile.name}</Link ></li>
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/" onClick={e=>{

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let host;
 
-if(process.env.NODE_ENV === 'deelopment') {
+if(process.env.NODE_ENV === 'development') {
     host = 'http://localhost:8080'
 } else{
     host= 'http://api.example.com'
