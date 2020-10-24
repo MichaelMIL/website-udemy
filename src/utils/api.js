@@ -5,7 +5,7 @@ let host;
 if(process.env.NODE_ENV === 'development') {
     host = 'http://localhost:8080'
 } else{
-    host= 'http://api.example.com'
+    host= 'http://localhost'
 }
 
 const API= {
