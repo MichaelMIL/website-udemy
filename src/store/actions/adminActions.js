@@ -91,7 +91,7 @@ export const uploadImage = (data,token,posdId,userId)=>{
 
 export const registerAdmin = (name, email, pass)=>{
     return dispatch=>{
-        API.registerAdmin(name,email,pass, res=>{
+        API.register(name,email,pass, res=>{
             if(res.status === 200){
                 dispatch({
                     type: 'REGISTER',
@@ -116,7 +116,7 @@ export const registerAdmin = (name, email, pass)=>{
 export const loginAdmin = (email, pass)=>{
     console.log("logging in", email, pass)
     return (dispatch)=>{
-        API.loginAdmin(email,pass,res =>{
+        API.login(email,pass,res =>{
             dispatch({
                         type: 'LOGIN',
                         payload: {
@@ -126,7 +126,7 @@ export const loginAdmin = (email, pass)=>{
                         }
             })
 
-            API.getAdminUserById(res.data.userId, res.data.id, res2=>{
+            API.getUserById(res.data.userId, res.data.id, res2=>{
                 dispatch({
                     type: 'AFTER_LOGIN',
                     payload: res2.data
@@ -151,7 +151,7 @@ export const setAdmin = (token, userId)=>{
 
 export const logoutAdmin = (token)=>{
     return dispatch=>{
-        API.logoutAdmin(token, res=>{
+        API.logout(token, res=>{
             dispatch({
                 type: 'LOGOUT',
                 payload: {

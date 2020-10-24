@@ -12,21 +12,8 @@ const API= {
             success(res);
         });
     },
-    loginAdmin : (email,pass, success)=>{
-        console.log("email& pass", email,pass)
-        axios.post(`${host}/api/adminusers/login`, {email: email, password:pass})
-        .then(res=>{
-            success(res);
-        });
-    },
     logout : (token, success)=>{
         axios.post(`${host}/api/users/logout?access_token=${token}`)
-        .then(res=>{
-            success(res);
-        });
-    },
-    logoutAdmin : (token, success)=>{
-        axios.post(`${host}/api/adminusers/logout?access_token=${token}`)
         .then(res=>{
             success(res);
         });
@@ -40,15 +27,7 @@ const API= {
             success(err);
         })
     },
-    registerAdmin: (name,email, pass,success)=>{
-        axios.post(`${host}/api/adminusers`, {name: name ,email: email, password: pass})
-        .then(res=>{
-            success(res);
-        })
-        .catch(err=>{
-            success(err);
-        })
-    },
+
     setAdmin:(token, userId, success)=>{
         axios.post(`${host}/api/adminusers/newAdmin?access_token=${token}`, {user_id: userId})
         .then(res=>{
@@ -63,12 +42,6 @@ const API= {
                 }
             }
         })
-        .then(res=>{
-            success(res);
-        })
-    },
-    getAdminUserById : (userId, token, success)=>{
-        axios.get(`${host}/api/adminusers/${userId}?access_token=${token}`)
         .then(res=>{
             success(res);
         })
