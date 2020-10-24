@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const host;
+let host;
+
 if(process.env.NODE_ENV === 'deelopment') {
     host = 'http://localhost:8080'
 } else{
