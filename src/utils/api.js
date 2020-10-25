@@ -35,7 +35,7 @@ const API= {
     },
 
     setAdmin:(token, userId, success)=>{
-        axios.post(`${host}/api/adminusers/newAdmin?access_token=${token}`, {user_id: userId})
+        axios.post(`${host}/api/users/newAdmin?access_token=${token}`, {user_id: userId})
         .then(res=>{
             success(res);
         })
