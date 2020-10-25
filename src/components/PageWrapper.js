@@ -31,7 +31,7 @@ class PageWrapper extends Component{
                         : 
                         this.props.auth.profile?
                             <div className="navbar-nav text-uppercase ml-auto">
-                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/">{this.props.children._self.props.auth.profile.name}</Link ></li>
+                                <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/">{this.auth.profile.name}</Link ></li>
                                 <li className="nav-item"><Link className="nav-link js-scroll-trigger" to="/" onClick={e=>{
                                 this.props.logout(this.props.auth.token);
                             }}>logout</Link ></li>
